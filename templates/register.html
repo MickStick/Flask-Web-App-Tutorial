@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+{% include './includes/head.html' %}
+<body>
+    {% include './includes/header.html' %}
+
+    <main>
+        <div class="container">
+                <form action="/register" method="POST" class="blue-text text-lighten-3 container">
+                    <h1 class="center">Register</h1>
+                    
+                    <div class="input-field">
+                        <input type="text" name="fname" placeholder="John">
+                        <label for="uname">First Name</label>
+                    </div>
+        
+                    <div class="input-field">
+                        <input type="text" name="lname" placeholder="Doe">
+                        <label for="uname">Last Name</label>
+                    </div>
+        
+                    <div class="input-field">
+                        <input type="text" name="uname" placeholder="doeboy">
+                        <label for="uname">Username</label>
+                    </div>
+        
+                    <div class="input-field">
+                        <input type="email" name="email" placeholder="exam@ple.com">
+                        <label for="email">Email</label>
+                    </div>
+        
+                    <div class="input-field">
+                        <input type="password" name="password" placeholder="*******">
+                        <label for="password">Password</label>
+                    </div>
+                    <div class="input-field">
+                        <input type="password" name="rpassword" placeholder="*******">
+                        <label for="rpassword">Re-Type Password</label>
+                    </div>
+        
+                    <button class="btn blue lighten-3">Submit</button>
+                </form>
+        </div>
+    </main>
+</body>
+</html>
