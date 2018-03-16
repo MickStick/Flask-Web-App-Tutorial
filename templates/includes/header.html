@@ -1,16 +1,25 @@
+
 <nav>
     <div class="nav-wrapper blue lighten-3">
       <a href="#!" class="brand-logo">Logo</a>
       <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
       <ul class="right hide-on-med-and-down">
         <li><a href="/" class="white-text">Home</a></li>
-        <li><a href="/login" class="white-text">Login</a></li>
-        <li><a href="/register" class="white-text">Register</a></li>
+        <li><a href="/sem/opt" class="white-text">Operational</a></li>
+        <!--<li><a href="/sem/ax" class="white-text">Axiomatic</a></li>
+        <li><a href="/sem/den" class="white-text">Denotational</a></li>-->
       </ul>
-      <ul class="side-nav" id="mobile-demo">
+      <ul class="side-nav blue lighten-3" id="mobile-demo">
           <li><a href="/" class="white-text">Home</a></li>
-          <li><a href="/login" class="white-text">Login</a></li>
-          <li><a href="/register" class="white-text">Register</a></li>
+          <li><a href="/sem/opt" class="white-text">Operational</a></li>
+          <!--<li><a href="/sem/ax" class="white-text">Axiomatic</a></li>
+          <li><a href="/sem/den" class="white-text">Denotational</a></li>-->
       </ul>
     </div>
   </nav>
+
+  <script>
+    $(document).ready(function(){
+      $(".button-collapse").sideNav();
+    })
+  </script>
