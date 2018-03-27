@@ -1,54 +1,98 @@
-'''
-def getBrac(arr):
+
+def getBrac(arr, text, oldAns):
     bracArr = []
-    for x in range(0, len(arr)):
-        if arr[x] == '(' or arr[x] == "(":
-            print("found")
-            #arr[x] = "_"
-            for y in range(x + 1, len(arr)):
-                print(x + 1, " - ", y)
-                print(arr)
-                print(arr[y])
-                if arr[y] != ')' or arr[y] != ")":
-                    bracArr.append(arr[y])
-                else:
-                    break
-            print(bracArr)
-            aSize = len(bracArr)
-            bracArr = getBrac(bracArr)
-            print("Within Brackets(Brac): ", bracArr)
-            bracArr = getProd(bracArr)
-            print("Within Brackets(Prod): ", bracArr)
-            bracArr = getQuot(bracArr)
-            print("Within Brackets(Quot): ", bracArr)
-            bracArr = getSum(bracArr)
-            print("Within Brackets(Sum): ", bracArr)
-            bracArr = getDiff(bracArr)
-            print("Within Brackets(Diff): ", bracArr)
+    newText = ""
+    newAns = ""
+    aLen = len(arr)
+    for x in range(0, aLen):
+        try:
+            if arr[x] == '(' or arr[x] == "(":
+                print("found")
+                #arr[x] = "_"
+                y = x + 1
+                while (y < len(arr)):
+                    
+                    print(x + 1, " - ", y)
+                    print(arr)
+                    print(arr[y])
+                    if arr[y] == '(' or arr[y] == "(":
+                        tempArr = arr
+                        tempArr[x] = '_'
+                        temp = getBrac(tempArr, text, oldAns)
+                        arr = temp["array"]
+                        text += temp["text"]
+                        oldAns = temp["old"]
+                        newText += temp["text"]
+                        newAns = temp["old"]
+                        print("Inner Brackets Done!")
+                        y -= 2
+                        print("Y: ", y, "\nX: ", x)
+                        aLen = len(arr)
+                    elif arr[y] != ')' or arr[y] != ")":
+                        bracArr.append(arr[y])
+                    else:
+                        break
+                    y += 1
 
-            arr[y] = "_"
+                print(bracArr)
+                aSize = len(bracArr)
+                print("NewText (other): ", newText)
+                print("NewAns (other): ", newAns)
+                bracAns = getBrac(bracArr, newText, newAns)
+                print("Within Brackets(Brac): ", bracArr)
+                bracAns = getProd(bracAns["array"], bracAns["text"], bracAns["old"])
+                print("Within Brackets(Prod): ", bracAns)
+                bracAns = getQuot(bracAns["array"], bracAns["text"], bracAns["old"])
+                print("Within Brackets(Quot): ", bracAns)
+                bracAns = getSumOrDiff(bracAns["array"], bracAns["text"], bracAns["old"])
+                print("Within Brackets(Sum): ", bracAns)
+                #bracArr = getDiff(bracArr)
+                #print("Within Brackets(Diff): ", bracArr)
+                text += bracAns["text"]
+                oldAns = bracAns["old"]
+                newText += bracAns["text"]
+                newAns = bracAns["old"]
+                print("NewText: ", newText)
+                print("NewAns: ", newAns)
+                print("Text: ",text)
+                print("OldAns: ",oldAns)
+                arr[y] = "_"
 
-            for y in range(x, len(arr)):
-                print("X in underscore replace: ", x)
-                if y - x != aSize:
-                    arr[y] = "_"
-                else:
-                    arr[y] = bracArr[len(bracArr) - 1]
-                    break
+                for y in range(x, len(arr)):
+                    print("X in underscore replace: ", x)
+                    if y - x != aSize:
+                        arr[y] = "_"
+                    else:
+                        arr[y] = bracAns["array"][len(bracAns["array"]) - 1]
+                        break
 
-            print("After Brackets: ", bracArr)
-            print("After Brackets: ", arr)
-            bracArr = []
+                print("After Brackets: ", bracAns["array"])
+                print("After Brackets: ", arr)
+                bracArr = []
+                
+        except:
+            break
+        
 
     newArr = []
     y = 0
     for x in range(0, len(arr)):
+        if arr[x] == ")":
+            arr[x] == "_"
         if arr[x] != "_":
             newArr.append(arr[x])
             y += 1
 
-    return newArr
-'''
+    print("NewAraay: ", newArr)
+    print("NewText: ", newText)
+    print("NewAns: ", newAns)
+    ans = {
+        'array': newArr,
+        'text': newText,
+        'old': newAns
+    }
+    return ans
+
 
 def getProd(arr, text, oldAns):
     #print("OG: ",arr)
@@ -214,7 +258,10 @@ def getPost(text):
     arr = text.split()
     #arr = getBrac(arr)
     
-    ans = getProd(arr, "", 'null')
+    # ans = getProd(arr, "", 'null')
+    # print("New Array(Prod): ", ans)
+    ans = getBrac(arr, "", 'null')
+    ans = getProd(ans["array"], ans["text"], ans["old"])
     print("New Array(Prod): ", ans)
     ans = getQuot(ans["array"], ans["text"], ans["old"])
     print("New Array(Quot): ", ans)
