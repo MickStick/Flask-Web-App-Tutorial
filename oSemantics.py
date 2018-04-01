@@ -252,7 +252,6 @@ def getDiff(arr, text, oldAns):
         if arr[x] != "_":
             newArr.append(arr[x])
             y += 1
-
     ans = {
         'array': newArr,
         'text': text,

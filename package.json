@@ -5,7 +5,9 @@
   "main": "server.py",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start" : "python server.py"
+    "app" : "set FLASK_APP=server.py",
+    "start" : "flask run --port=5050",
+    "dev" : "set FLASK_DEBUG=1 && npm start"
   },
   "repository": {
     "type": "git",
